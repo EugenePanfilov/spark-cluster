@@ -1,27 +1,10 @@
-tf_init:
-	cd infrastructure && terraform init -upgrade
+include .env
 
-tf_plan:
-	cd infrastructure && terraform plan
+check-venv:
+	which python3
 
-tf_apply:
-	cd infrastructure && terraform apply -auto-approve
+create-bucket:
+	s3cmd mb s3://$(S3_BUCKET)
 
-tf_destroy:
-	cd infrastructure && terraform destroy -auto-approve
-
-yc_list_images:
-	yc compute image list --folder-id standard-images > images.txt
-
-sync-repo:
-	rsync -avz \
-		--exclude=.venv \
-		--exclude=infrastructure/.terraform \
-		--exclude=.terraform \
-		--exclude=.terraform-version \
-		--exclude=.terraformrc \
-		--exclude=*.info \
-		--exclude=*.lock.hcl \
-		--exclude=*.tfstate \
-		--exclude=*.backup \
-		--exclude=*.json . yc-proxy:/home/ubuntu/otus/otus-practice-cloud-infra
+upload-data:
+	s3cmd put --recursive data/titanic s3://$(S3_BUCKET)/
