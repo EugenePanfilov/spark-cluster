@@ -1,16 +1,24 @@
 # OTUS. PySpark
 
 Для подключения к proxy виртуальной машине
-`ssh -i <your ssh private key> -L 8888:localhost:8888 <user>@<public ip vm>`
+```
+ssh -i <your ssh private key> -L 8888:localhost:8888 <user>@<public ip vm>
+```
 
 Для подключения к мастер-ноде
-`ssh -L 8888:localhost:8888 ubuntu@<fqdn dataproc master node>`
+```
+ssh -L 8888:localhost:8888 ubuntu@<fqdn dataproc master node>
+```
 
 Скопировать скрипт с локальной машины на мастер-ноду кластера:
-`scp prepare_fraud_dataset.py dataproc-master:/home/ubuntu/`
+```
+scp prepare_fraud_dataset.py dataproc-master:/home/ubuntu/
+```
 
 Запуск скрипта обработки данных на спарк-кластере. Команда запускается на мастер-ноде кластера:
-`spark-submit --master yarn prepare_fraud_dataset.py`
+```
+spark-submit --master yarn prepare_fraud_dataset.py
+```
 
 Этот скрипт берёт сырые CSV/TXT файлы с транзакциями из HDFS, объединяет их в один Spark DataFrame, чистит мусорные строки, переименовывает колонки и приводит типы (включая парсинг даты tx_datetime). Затем он удаляет записи с некорректной датой, сохраняет результат в HDFS в формате Parquet и делает контрольный вывод схемы и нескольких строк. После этого скрипт считает число fraud-операций по неделям, строит по этой агрегации столбчатый график и загружает получившуюся картинку обратно в HDFS.
 
