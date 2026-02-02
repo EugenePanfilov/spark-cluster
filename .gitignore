@@ -5,3 +5,5 @@ terraform.tfvars
 *.tfplan
 .terraform
 *.info
+.env
+notebooks/
