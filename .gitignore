@@ -6,4 +6,6 @@ terraform.tfvars
 .terraform
 *.info
 .env
+.bashrc
+check.sh
 notebooks/
