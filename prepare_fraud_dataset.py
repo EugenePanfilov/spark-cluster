@@ -8,8 +8,8 @@ import subprocess
 # ----------------------------
 # НАСТРОЙКИ (меняете здесь)
 # ----------------------------
-SRC = "hdfs:///user/ubuntu/data/"            # вход: папка с txt/csv
-DST = "hdfs:///user/ubuntu/parquet/"         # выход: папка parquet
+SRC = "hdfs:///user/ubuntu/data/csv/"            # вход: папка с txt/csv
+DST = "hdfs:///user/ubuntu/data/parquet/"         # выход: папка parquet
 SEP = ","                                    # разделитель CSV
 TS_FORMAT = "yyyy-MM-dd HH:mm:ss"            # формат tx_datetime
 
